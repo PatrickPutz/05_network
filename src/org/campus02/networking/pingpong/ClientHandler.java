@@ -3,7 +3,7 @@ package org.campus02.networking.pingpong;
 import java.io.*;
 import java.net.Socket;
 
-public class ClientHandler {
+public class ClientHandler implements Runnable {
 
     private Socket client;
 
@@ -37,5 +37,10 @@ public class ClientHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void run() {
+        start();
     }
 }

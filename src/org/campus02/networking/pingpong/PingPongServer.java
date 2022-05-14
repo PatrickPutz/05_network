@@ -11,11 +11,13 @@ public class PingPongServer {
         try (ServerSocket serverSocket = new ServerSocket(1111)) {
             while (true) {
                 System.out.println("Server wartet auf Clients...");
-                try (Socket client = serverSocket.accept()) {
-                    System.out.println("Verbindung zu Client hergestellt");
-                    ClientHandler clientHandler = new ClientHandler(client);
-                    clientHandler.start();
-                }
+                Socket client = serverSocket.accept();
+                System.out.println("Verbindung zu Client hergestellt");
+                ClientHandler clientHandler = new ClientHandler(client);
+                // clientHandler.start();
+
+                Thread th = new Thread(clientHandler);
+                th.start();
             }
         } catch (IOException e) {
             e.printStackTrace();
